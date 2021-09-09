@@ -5,10 +5,10 @@ from scapy import all as scapy
 
 def scan(ip):
     arp_request = scapy.ARP(pdst=ip)
-    print(arp_request.summary())
-    broadcast = scapy.Ether(dst="FF:FF:FF:FF:FF:FF")
-    print(broadcast.summary())
+    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+    arp_req_broadcast = broadcast/arp_request
+    answered, unanswered = scapy.srp(arp_req_broadcast, timeout=1)
+    print(answered.summary())
     
 
-
-scan("192.1.1.1/24")
+scan("192.168.1.69/24")
